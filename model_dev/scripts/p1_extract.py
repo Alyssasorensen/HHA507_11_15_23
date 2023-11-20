@@ -1,22 +1,22 @@
 import pandas as pd 
 
-## get data 
+## Loading/Extracting Data
 
-# original link: https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8 
-# data download link: 
-datalink = 'https://data.lacity.org/api/views/2nrs-mtv8/rows.csv?date=20231115&accessType=DOWNLOAD'
+# Landing Page: https://catalog.data.gov/dataset/nypd-arrest-data-year-to-date
+# Data Download Link: 
+datalink = 'https://data.cityofnewyork.us/api/views/uip8-fykc/rows.csv?accessType=DOWNLOAD'
 
 df = pd.read_csv(datalink)
-df.size
+df.shape
 df.sample(5)
 
-
-## save as csv to WK9/code/model_dev/data/raw
-df.to_csv('WK9/code/model_dev/data/raw/crime_data.csv', index=False)
-
-## save as pickle to WK9/code/model_dev/data/raw
-df.to_pickle('WK9/code/model_dev/data/raw/crime_data.pkl')
+df.columns
 
 
-# LAPD reporting districts 
-## original link: https://geohub.lacity.org/datasets/39b404bd22804807ba0f0e1628e585f2/explore
+
+
+## Saving data as a csv to model_dev/data/raw folder
+df.to_csv('model_dev/data/raw/arrest_data.csv', index=False)
+
+## Saving as pickle to model_dev/data/raw folder folder
+df.to_pickle('model_dev/data/raw/arrest_data.pkl')
