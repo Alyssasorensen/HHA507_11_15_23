@@ -3,7 +3,7 @@
 
 Concentrate on the identification of datasets well-suited for a machine learning experiment, emphasizing the essential steps of data cleaning, encoding, and transformation required to adequately prepare the data.
 
-## **2. Data Cleaning and Transformation Plan:**
+## **1. Data Cleaning and Transformation Plan:**
 
 ### **NYPD_Arrest_Data__Year_to_Date_ Dataset:**
 
@@ -65,3 +65,37 @@ The machine learning task is regression, aiming to predict sales quantities (RET
 
 5. **Identify Dependent and Independent Variables:**
    - Define RETAIL SALES and WAREHOUSE SALES as dependent variables, with SUPPLIER, ITEM TYPE, and other relevant features as independent variables.
+
+
+## **3. Data Cleaning Execution (Optional Challenge):**
+
+Write a Python script using Pandas, NumPy, or other relevant libraries.
+Implement the planned data cleaning and transformation steps for both datasets.
+
+## **4. Dataset Splitting:**
+
+Create a separate script for each dataset.
+
+Follow standard practices for dataset splitting:
+
+Import necessary libraries (e.g., scikit-learn).
+
+Load the cleaned and transformed dataset.
+
+Split the dataset into training, validation, and testing sets using train_test_split.
+
+Save or display the shapes of the resulting sets.
+
+**Notes:**
+
+Ensure your code and markdown files are well-documented for clarity.
+
+Adjust cleaning and transformation steps based on the specific characteristics of each dataset.
+
+Adjustments may be needed based on the nature and specific requirements of the chosen datasets.
+
+
+
+
+
+
