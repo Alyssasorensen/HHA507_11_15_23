@@ -19,7 +19,11 @@ df.dtypes # nice combination of numbers and strings/objects
 
 ## drop columns
 to_drop = [
-    'month'
+    'month',
+    'year',
+    'item_code'
+    'item_description',
+    'item_type',
 ]
 
 df.drop(to_drop, axis=1, inplace=True, errors='ignore')

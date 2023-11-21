@@ -1,38 +1,47 @@
 import pandas as pd
 import pickle
+import joblib
 
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import mean_squared_error, r2_score, classification_report, confusion_matrix
+from xgboost import XGBClassifier, XGBRegressor
+from sklearn.model_selection import train_test_split, GridSearchCV
 
-from sklearn.dummy import DummyClassifier
+# Importing the cleaned sample of 100 data
+df = pd.read_csv('model_dev1/data/processed/warehouse_and_retail_sales_data.csv')
 
-from xgboost import XGBClassifier
 
-# Import the clean random sample of 10k data
-df = pd.read_csv('WK9/code/model_dev/data/processed/crime_data.csv')
-len(df)
-
-# drop rows with missing values
+# Dropping rows with missing values
 df.dropna(inplace=True)
 len(df)
 
-# Define the features and the target variable
-X = df.drop('vict_sex', axis=1)  # Features (all columns except 'arrest')
-y = df['vict_sex']               # Target variable (arrest)
+# Defining the features and the target variable ('retail_transfers')
+X = df.drop('retail_transfers', axis=1)  # Features (all columns except 'retail_transfers') all numebrs
+y = df['retail_transfers']               # Target variable (retail_transfers) all numbers
 
-# Initialize the StandardScaler
+
+# Initializing the StandardScaler
 scaler = StandardScaler()
-# Fit the scaler to the features and transform
-X_scaled = scaler.fit_transform(X)
+scaler.fit(X)          # Fitting the scaler to the features
+pickle.dump(scaler, open('model_dev1/models/scaler.sav', 'wb'))  # Saving the scaler for later use
 
-# Split the scaled data into training, validation, and testing sets (70%, 15%, 15%)
+# Fitting the scaler to the features and transform
+X_scaled = scaler.transform(X)
+
+# Splitting the scaled data into training, validation, and testing sets
 X_train, X_temp, y_train, y_temp = train_test_split(X_scaled, y, test_size=0.3, random_state=42)
 X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
 
-# Check the size of each set
+# Checking the size of each set
 (X_train.shape, X_val.shape, X_test.shape)
+
+# Pkle the X_train for later use in explanation
+pickle.dump(X_train, open('model_dev1/models/X_train.sav', 'wb'))
+# Pkle X.columns for later use in explanation
+pickle.dump(X.columns, open('model_dev1/models/X_columns.sav', 'wb'))
 
 
 
@@ -150,4 +159,4 @@ xgboost_acc = xgboost.score(X_test, y_test)
 
 
 ## save the model
-pickle.dump(xgboost, open('WK9/code/model_dev/models/xgboost.sav', 'wb'))
+pickle.dump(xgboost, open('model_dev1/models/xgboost.sav', 'wb'))
